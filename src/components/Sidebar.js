@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import {
   Box,
@@ -17,9 +17,12 @@ import {
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { ReactComponent as SquareTableIcon } from './../assets/Table.svg';
 import { ReactComponent as RoundTableIcon } from './../assets/Mid.svg';
+import { createTable } from '../services/apiService'; // Import createTable from API service
 
-const Sidebar = ({ tables, addTable }) => {
-  const handleSubmit = (values, { resetForm }) => {
+const Sidebar = ({ tables, addTable}) => {
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (values, { resetForm }) => {
     const newTable = {
       id: `T-${tables.length + 1}`,
       name: values.name,
@@ -30,7 +33,16 @@ const Sidebar = ({ tables, addTable }) => {
     };
     addTable(newTable);
     resetForm();
+    try {
+      const newTable = await createTable(values); // Create a new table using the backend API
+      addTable(newTable); // Add the new table to the state in the parent component
+      resetForm(); // Reset the form fields
+    } catch (err) {
+      console.error(err);
+      setError('Failed to create the table. Please try again.');
+    }
   };
+
 
   const initialIcons = [
     { id: 'square-icon', type: 'square', component: <SquareTableIcon style={{ width: 80, height: 80 }} /> },
@@ -41,15 +53,13 @@ const Sidebar = ({ tables, addTable }) => {
     if (!result.destination) return;
     const draggedItem = initialIcons.find((icon) => icon.id === result.draggableId);
     if (draggedItem) {
-      const newTable = {
-        id: `T-${tables.length + 1}`,
+      handleSubmit({
         name: `${draggedItem.type} Table`,
         type: draggedItem.type,
         minCovers: 1,
         maxCovers: 4,
         active: true,
-      };
-      addTable(newTable);
+      });
     }
   };
 
@@ -116,7 +126,7 @@ const Sidebar = ({ tables, addTable }) => {
           name: '',
           type: 'round',
           minCovers: 1,
-          maxCovers: 1,
+          maxCovers: 4,
           active: true,
         }}
         onSubmit={handleSubmit}
@@ -193,6 +203,7 @@ const Sidebar = ({ tables, addTable }) => {
               <Button variant="contained" type="submit" color="primary" fullWidth sx={{ mt: 2 }}>
                 Add Table
               </Button>
+              {error && <Typography color="error">{error}</Typography>}
             </Box>
           </Form>
         )}
