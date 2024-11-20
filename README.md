@@ -37,4 +37,8 @@ Follow these steps to set up and run the frontend application:
    cd floor-management-frontend
 2. **Dependencies**:
    ```bash
-   (npm install)
+   npm install
+   npm install axios
+   npm install @mui/icons-material
+
+
