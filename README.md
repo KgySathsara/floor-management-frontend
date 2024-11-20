@@ -41,4 +41,5 @@ Follow these steps to set up and run the frontend application:
    npm install axios
    npm install @mui/icons-material
 
+### Server running on http://localhost:3000/
 
