@@ -36,4 +36,5 @@ Follow these steps to set up and run the frontend application:
    git clone (https://github.com/KgySathsara/floor-management-frontend)
    cd floor-management-frontend
 2. **Dependencies**:
-   npm install
+   ```bash
+   (npm install)
