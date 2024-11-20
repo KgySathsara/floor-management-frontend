@@ -1,38 +1,124 @@
-.App {
-  text-align: center;
+/* Layout */
+.sidebar {
+  background: #f9f9f9;
+  padding: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.content {
+  padding: 20px;
+  background: #f8f8f8;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Centered Header */
+.header-center {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 60px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
 }
 
-.App-link {
-  color: #61dafb;
+.header-center h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Main Room Header */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.main-header h2 {
+  font-size: 18px;
+  margin: 0;
+  color: #333;
+}
+
+.room-controls button {
+  margin-left: 10px;
+}
+
+/* Main Room */
+.main-room {
+  border: 1px dashed #ddd;
+  min-height: 500px;
+  background: #fff;
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Tables */
+.table {
+  position: relative;
+  background: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: grab;
+  border: 1px solid #f5c6cb;
+  transition: transform 0.3s;
+}
+
+.table.square {
+  width: 80px;
+  height: 80px;
+}
+
+.table.round {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+/* Table Controls */
+.table-controls {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  gap: 5px;
+}
+
+.table:hover .table-controls {
+  display: flex;
+}
+
+.table-controls button {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+
+.table-controls button:hover {
+  background: #f5c6cb;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #000;
+  color: #fff;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.footer-item {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
